@@ -3,7 +3,6 @@ vim.g.have_nerd_font = true -- Nerd Font
 vim.opt.number = true -- Show line number
 vim.opt.relativenumber = true -- Show relative line number
 vim.opt.mouse = 'a' -- Enable mouse for all modes
-vim.opt.breakindent = true -- Enable break indent
 vim.opt.undofile = true -- Save undo history
 vim.opt.signcolumn = 'yes' -- Sign column
 vim.opt.cursorline = true -- Highlight current line
