@@ -7,6 +7,11 @@ return {
   config = function()
     require('lualine').setup {
       theme = 'horizon',
+      options = {
+        disabled_filetypes = {
+          statusline = { 'alpha' },
+        },
+      },
     }
   end,
 }
