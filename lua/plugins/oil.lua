@@ -14,5 +14,6 @@ return {
       delete_to_trash = true,
     }
     vim.keymap.set('n', '-', oil.open_float, { desc = 'Open parent directory' })
+    vim.keymap.set('n', 'q', oil.close, { desc = 'Close oil' })
   end,
 }
