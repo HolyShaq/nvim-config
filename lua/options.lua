@@ -9,6 +9,8 @@ vim.opt.cursorline = true -- Highlight current line
 vim.opt.showmode = false -- Hide mode
 vim.opt.updatetime = 250 -- Decrease update time
 vim.opt.inccommand = 'split' -- Live preview of substitutions
+vim.opt.wildmenu = true -- Enable wildmenu
+vim.opt.wildmode = 'longest:full,full' -- Wildmenu options
 
 -- Keep 10 lines above and below the cursor
 vim.opt.scrolloff = 10

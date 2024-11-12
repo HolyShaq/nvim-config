@@ -29,6 +29,10 @@ map('n', '<M-;>', '5<C-w>-')
 map('n', '<C-s>', ':w<CR>')
 map('i', '<C-s>', '<Esc>:w<CR>')
 
+-- Map Shift+Enter to insert newline
+map('n', '<S-Enter>', 'o<Esc>')
+map('n', '<C-Enter>', 'O<Esc>')
+
 -- NGL idk what this is but its in the kickstart so ima keep it in
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
