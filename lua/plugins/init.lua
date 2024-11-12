@@ -1,5 +1,5 @@
 return {
-  {
+  { -- Smooth Cursor
     'gen740/SmoothCursor.nvim',
     config = function()
       require('smoothcursor').setup {
@@ -8,4 +8,10 @@ return {
       }
     end,
   },
+
+  -- Presence
+  { 'andweeb/presence.nvim', opts = {} },
+
+  -- Key Analyzer
+  { 'meznaric/key-analyzer.nvim', opts = {} },
 }

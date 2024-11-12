@@ -14,6 +14,13 @@ return {
       delete_to_trash = true,
     }
     vim.keymap.set('n', '-', oil.open_float, { desc = 'Open parent directory' })
-    vim.keymap.set('n', 'q', oil.close, { desc = 'Close oil' })
+
+    -- Autocmd that binds q to close Oil when it opens
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'OilEnter',
+      callback = function()
+        vim.keymap.set('n', '<Esc>', oil.close, { buffer = 0, desc = 'Close oil' })
+      end,
+    })
   end,
 }
