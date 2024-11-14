@@ -15,7 +15,7 @@ return {
     }
     vim.keymap.set('n', '-', oil.open_float, { desc = 'Open parent directory' })
 
-    -- Autocmd that binds q to close Oil when it opens
+    -- Autocmd that binds <Esc> to close Oil only when it's open
     vim.api.nvim_create_autocmd('User', {
       pattern = 'OilEnter',
       callback = function()
