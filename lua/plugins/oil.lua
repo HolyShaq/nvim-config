@@ -10,17 +10,14 @@ return {
   config = function()
     local oil = require 'oil'
     oil.setup {
+      keymaps = {
+        ['|'] = { 'actions.select', opts = { vertical = true }, desc = 'Open the entry in a vertical split' },
+        ['_'] = { 'actions.select', opts = { horizontal = true }, desc = 'Open the entry in a horizontal split' },
+        ['<Esc>'] = { 'actions.close', desc = 'Close oil' },
+      },
       skip_confirm_for_simple_edits = true,
       delete_to_trash = true,
     }
     vim.keymap.set('n', '-', oil.open_float, { desc = 'Open parent directory' })
-
-    -- Autocmd that binds <Esc> to close Oil only when it's open
-    vim.api.nvim_create_autocmd('User', {
-      pattern = 'OilEnter',
-      callback = function()
-        vim.keymap.set('n', '<Esc>', oil.close, { buffer = 0, desc = 'Close oil' })
-      end,
-    })
   end,
 }
