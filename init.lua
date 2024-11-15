@@ -143,6 +143,7 @@ require('lazy').setup({
             i = {
               ['|'] = 'file_vsplit',
               ['_'] = 'file_split',
+              ['<Esc>'] = require('telescope.actions').close,
             },
           },
         },
