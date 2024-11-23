@@ -9,6 +9,12 @@ return {
     end,
   },
 
+  -- Color Highlighting
+  { 'brenoprata10/nvim-highlight-colors', opts = {} },
+
+  -- Transparency
+  { 'xiyaowong/transparent.nvim', opts = {} },
+
   { -- Discord Presence
     'IogaMaster/neocord',
     event = 'VeryLazy',
@@ -29,4 +35,12 @@ return {
 
   -- Key Analyzer
   { 'meznaric/key-analyzer.nvim', opts = {} },
+
+  { -- Silly Automata Plugins
+    'eandrju/cellular-automaton.nvim',
+    config = function()
+      vim.keymap.set('n', '<leader>lolr', '<cmd>CellularAutomaton make_it_rain<CR>')
+      vim.keymap.set('n', '<leader>lolg', '<cmd>CellularAutomaton game_of_life<CR>')
+    end,
+  },
 }
