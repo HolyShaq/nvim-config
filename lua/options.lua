@@ -12,6 +12,7 @@ vim.opt.inccommand = 'split' -- Live preview of substitutions
 vim.opt.wildmenu = true -- Enable wildmenu
 vim.opt.wildmode = 'longest:full,full' -- Wildmenu options
 vim.opt.tabstop = 4 -- Tab size
+vim.opt.shiftwidth = 4 -- Shift size
 
 -- Keep 10 lines above and below the cursor
 vim.opt.scrolloff = 10
