@@ -43,4 +43,7 @@ return {
       vim.keymap.set('n', '<leader>lolg', '<cmd>CellularAutomaton game_of_life<CR>')
     end,
   },
+
+  -- Vim-Godot
+  { 'habamax/vim-godot', event = 'VimEnter' },
 }

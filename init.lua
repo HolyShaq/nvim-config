@@ -423,6 +423,11 @@ require('lazy').setup({
           end,
         },
       }
+
+      require('lspconfig').gdscript.setup {
+        name = 'godot',
+        cmd = { 'ncat', '127.0.0.1', '6005' },
+      }
     end,
   },
 
@@ -521,7 +526,7 @@ require('lazy').setup({
             luasnip.lsp_expand(args.body)
           end,
         },
-        completion = { completeopt = 'menu,menuone,noinsert' },
+        completion = { completeopt = 'menu,menuone,noselect' },
 
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
@@ -687,7 +692,7 @@ require('lazy').setup({
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
       },
-      indent = { enable = true, disable = { 'ruby' } },
+      indent = { enable = true, disable = { 'ruby', 'gdscript' } },
     },
 
     -- There are additional nvim-treesitter modules that you can use to interact
