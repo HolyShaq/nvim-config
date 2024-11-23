@@ -649,19 +649,34 @@ require('lazy').setup({
         },
       },
       ensure_installed = {
-        'bash',
-        'c',
-        'diff',
-        'html',
+        -- Vim Languages
         'lua',
         'luadoc',
-        'markdown',
-        'markdown_inline',
-        'query',
         'vim',
         'vimdoc',
+
+        -- General Languages
+        'bash',
+        'c',
+        'python',
+
+        -- Javascript
         'javascript',
         'typescript',
+
+        -- Godot
+        'gdscript',
+        'godot_resource',
+        'gdshader',
+
+        -- Markdown
+        'markdown',
+        'markdown_inline',
+
+        -- Misc
+        'diff',
+        'html',
+        'query',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
