@@ -39,6 +39,9 @@ map('n', '<leader>P', '"0P')
 map('v', '<leader>p', '"0p')
 map('v', '<leader>P', '"0P')
 
+-- Buffer controls
+map('n', '<leader>bd!', '<Cmd>bd<CR>', { desc = 'Delete buffer' })
+
 -- NGL idk what this is but its in the kickstart so ima keep it in
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
