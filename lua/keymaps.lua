@@ -34,17 +34,18 @@ map('n', '<S-Enter>', 'o<Esc>')
 map('n', '<C-Enter>', 'O<Esc>')
 
 -- Map <leader>+p to SANE pasting
-map('n', '<leader>p', '"0p')
-map('n', '<leader>P', '"0P')
-map('v', '<leader>p', '"0p')
-map('v', '<leader>P', '"0P')
+map('n', '<leader>p', '"0p', { desc = 'Sane pasting' })
+map('n', '<leader>P', '"0P', { desc = 'Sane pasting' })
+map('v', '<leader>p', '"0p', { desc = 'Sane pasting' })
+map('v', '<leader>P', '"0P', { desc = 'Sane pasting' })
 
 -- Move selected lines with shift+j or shift+k
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 -- Buffer controls
-map('n', '<leader>bd!', '<Cmd>bd<CR>', { desc = 'Delete buffer' })
+map('n', '<leader>bd', '<Cmd>bd<CR>', { desc = 'Delete buffer' })
+map('n', '<leader>bD', '<Cmd>bd!<CR>', { desc = 'Delete buffer!!!' })
 
 -- NGL idk what this is but its in the kickstart so ima keep it in
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier

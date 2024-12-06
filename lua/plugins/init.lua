@@ -3,9 +3,6 @@ return {
   -- Color Highlighting
   { 'brenoprata10/nvim-highlight-colors', opts = {} },
 
-  -- Transparency
-  { 'xiyaowong/transparent.nvim', opts = {} },
-
   -- { -- Discord Presence
   --   'IogaMaster/neocord',
   --   event = 'VeryLazy',
