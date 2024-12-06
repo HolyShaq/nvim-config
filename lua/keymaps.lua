@@ -39,6 +39,10 @@ map('n', '<leader>P', '"0P')
 map('v', '<leader>p', '"0p')
 map('v', '<leader>P', '"0P')
 
+-- Move selected lines with shift+j or shift+k
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
 -- Buffer controls
 map('n', '<leader>bd!', '<Cmd>bd<CR>', { desc = 'Delete buffer' })
 
