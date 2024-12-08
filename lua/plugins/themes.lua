@@ -9,7 +9,7 @@ return {
     'cpwrs/americano.nvim',
     priority = 1000,
     init = function()
-      vim.cmd.colorscheme 'americano'
+      vim.cmd.colorscheme 'catppuccin'
     end,
   },
   'EdenEast/nightfox.nvim',
