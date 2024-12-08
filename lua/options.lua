@@ -13,6 +13,7 @@ vim.opt.wildmenu = true -- Enable wildmenu
 vim.opt.wildmode = 'longest:full,full' -- Wildmenu options
 vim.opt.tabstop = 4 -- Tab size
 vim.opt.shiftwidth = 4 -- Shift size
+vim.opt.breakindent = true -- Indent broken lines
 
 -- Keep 10 lines above and below the cursor
 vim.opt.scrolloff = 10
@@ -47,6 +48,11 @@ vim.opt.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 vim.opt.shellquote = ''
 vim.opt.shellxquote = ''
 
+-- Disable comment extending after newline input
+vim.cmd 'autocmd BufEnter * set formatoptions-=cro'
+vim.cmd 'autocmd BufEnter * setlocal formatoptions-=cro'
+
 -- Neovide
 vim.g.neovide_fullscreen = true
 vim.g.neovide_cursor_vfx_mode = 'sonicboom'
+vim.o.guifont = 'MesloLGM Nerd Font:h13'

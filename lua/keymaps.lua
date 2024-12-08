@@ -47,6 +47,11 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 map('n', '<leader>bd', '<Cmd>bd<CR>', { desc = 'Delete buffer' })
 map('n', '<leader>bD', '<Cmd>bd!<CR>', { desc = 'Delete buffer!!!' })
 
+-- Neovide
+map('n', '<M-Enter>', function()
+  vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
+end, { desc = 'Toggle Neovide Fullscreen' })
+
 -- NGL idk what this is but its in the kickstart so ima keep it in
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
