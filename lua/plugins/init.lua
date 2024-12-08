@@ -44,13 +44,6 @@ return {
     end,
   },
 
-  -- Focus
-  { 'nvim-focus/focus.nvim', opts = {
-    ui = {
-      hybridnumber = true,
-    },
-  } },
-
   -- Vim-Godot
   { 'habamax/vim-godot', event = 'VimEnter' },
 }
