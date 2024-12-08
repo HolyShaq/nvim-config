@@ -81,6 +81,7 @@ require('lazy').setup({
         { '<leader>t', group = '[T]oggle' },
         { '<leader>b', group = '[B]uffer Controls' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
       },
     },
   },
