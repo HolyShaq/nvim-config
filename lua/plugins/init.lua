@@ -46,4 +46,7 @@ return {
 
   -- Vim-Godot
   { 'habamax/vim-godot', event = 'VimEnter' },
+
+  -- Speed Dating
+  { 'tpope/vim-speeddating', event = 'VimEnter' },
 }

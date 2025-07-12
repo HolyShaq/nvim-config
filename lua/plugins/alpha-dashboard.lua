@@ -168,7 +168,7 @@ return {
 
       -- Keymap
       -- Open dashboard
-      vim.api.nvim_set_keymap('n', '<leader>h', ':Alpha<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<leader>hh', ':Alpha<CR>', { noremap = true, silent = true })
     end,
   },
 }

@@ -27,7 +27,12 @@ map('n', '<M-;>', '5<C-w>-')
 
 -- Map Ctrl+S to save in both normal and insert mode
 map('n', '<C-s>', ':w<CR>')
+map('n', '<C-S>', ':w!<CR>')
 map('i', '<C-s>', '<Esc>:w<CR>')
+map('i', '<C-S>', '<Esc>:w!<CR>')
+
+-- Unmap F1
+map('n', '<F1>', '', { noremap = true })
 
 -- Map Shift+Enter to insert newline
 map('n', '<S-Enter>', 'o<Esc>')
@@ -46,6 +51,11 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 -- Buffer controls
 map('n', '<leader>bd', '<Cmd>bd<CR>', { desc = 'Delete buffer' })
 map('n', '<leader>bD', '<Cmd>bd!<CR>', { desc = 'Delete buffer!!!' })
+map('n', '<leader>bc', '<Cmd>%bd|e#|bd#<CR>', {desc = 'Clear all other buffers'})
+
+-- Tailwind controls
+map('n', '<leader>twt', ':TailwindConcealToggle<CR>', { desc = 'Toggle tailwind conceal' })
+map('n', '<leader>tws', ':TailwindSort<CR>', {desc = 'Sort tailwind'})
 
 -- Neovide
 map('n', '<M-Enter>', function()

@@ -8,6 +8,9 @@ return {
     require('lualine').setup {
       theme = 'horizon',
       options = {
+        sections = {
+          lualine_c = { { 'filename', path = 2 } },
+        },
         disabled_filetypes = {
           statusline = { 'alpha' },
         },

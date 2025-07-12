@@ -14,10 +14,10 @@ return {
     vim.keymap.set('i', '<A-i>', neocodeium.accept_line)
 
     -- Cycle forwards and backwards
+    -- vim.keymap.set('i', '<A-0>', function()
+    --   require('neocodeium').sycle_or_complete()
+    -- end)
     vim.keymap.set('i', '<A-0>', function()
-      require('neocodeium').sycle_or_complete()
-    end)
-    vim.keymap.set('i', '<A-9>', function()
       require('neocodeium').cycle_or_complete(-1)
     end)
 
