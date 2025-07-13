@@ -14,6 +14,8 @@ return {
     vim.g.vimtex_view_general_options = [[--unique "file:@pdf#src:@line@tex"]]
     vim.g.vimtex_quickfix_ignore_filters = {
       'Warning',
+      'Underfull',
+      'Overfull',
     }
   end,
 }
