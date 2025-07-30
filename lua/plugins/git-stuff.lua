@@ -12,13 +12,18 @@ return {
   {
     'sindrets/diffview.nvim',
     config = function()
+      local actions = require('diffview.actions')
       require('diffview').setup {
         keymaps = {
           view = {
             ['<Esc>'] = ':DiffviewClose<CR>',
+            ['n'] = actions.select_next_entry,
+            ['N'] = actions.select_prev_entry,
           },
           file_panel = {
             ['<Esc>'] = ':DiffviewClose<CR>',
+            ['n'] = actions.select_next_entry,
+            ['N'] = actions.select_prev_entry,
           },
         },
       }
