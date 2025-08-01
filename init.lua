@@ -158,6 +158,28 @@ require('lazy').setup({
           },
           find_files = {
             hidden = true,
+            no_ignore = true,
+            follow = true,
+            file_ignore_patterns = {
+              'node_modules',
+              'build',
+              'dist',
+              '.next',
+              '.turbo',
+              '.vercel',
+              '.output',
+              '.expo',
+              'coverage',
+              'yarn.lock',
+              'package%-lock.json',
+              'bun.lockb',
+              'pnpm%-lock.yaml',
+              '.DS_Store',
+              '.git',
+              '.cache',
+              '.venv',
+              'venv'
+            },
           },
         },
         extensions = {
@@ -369,8 +391,7 @@ require('lazy').setup({
       -- local capabilities = vim.lsp.protocol.make_client_capabilities()
       -- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      require('lspconfig')['lua_ls'].setup({ capabilities = capabilities })
-
+      require('lspconfig')['lua_ls'].setup { capabilities = capabilities }
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
