@@ -29,6 +29,7 @@ return {
       }
 
       vim.keymap.set('n', '<leader>gdf', ':DiffviewOpen<CR>', { desc = '[G]it [D]i[ff]' })
+      vim.keymap.set('n', '<leader>gdh', ':DiffviewFileHistory %<CR>', { desc = '[G]it [D]i[ff] File [H]istory' })
       vim.keymap.set('n', '<leader>gdm', ':DiffviewOpen origin/HEAD...HEAD<CR>', { desc = '[G]it [D]iff [M]ain' })
       vim.keymap.set('n', '<leader>gds', ':DiffviewFileHistory<CR>', { desc = '[G]it [D]iff [S]tatus' })
     end,
