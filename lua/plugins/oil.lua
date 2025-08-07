@@ -14,6 +14,7 @@ return {
         ['|'] = { 'actions.select', opts = { vertical = true }, desc = 'Open the entry in a vertical split' },
         ['_'] = { 'actions.select', opts = { horizontal = true }, desc = 'Open the entry in a horizontal split' },
         ['<Esc>'] = { 'actions.close', desc = 'Close oil' },
+        ['<C-s>'] = false,
       },
       skip_confirm_for_simple_edits = true,
       delete_to_trash = true,
