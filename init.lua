@@ -109,6 +109,17 @@ require('lazy').setup({
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+
+      -- Color picker persistence
+      {
+        'exosyphon/telescope-color-picker.nvim',
+        dependencies = {
+          { 'nvim-telescope/telescope.nvim' },
+        },
+        config = function()
+          require('telescope').load_extension 'colors'
+        end,
+      },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -132,21 +143,32 @@ require('lazy').setup({
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
+      local actions = require 'telescope.actions'
+      local action_state = require 'telescope.actions.state'
+      local oil = require 'oil'
+
+      local maps = {
+        ['|'] = 'file_vsplit',
+        ['_'] = 'file_split',
+        ['<Esc>'] = require('telescope.actions').close,
+
+        -- Open selected file's directory in Oil
+        ['<C-->'] = function(prompt_bufnr)
+          local entry = action_state.get_selected_entry()
+          actions.close(prompt_bufnr)
+          local dir = vim.fn.fnamemodify(entry.path, ':h')
+          oil.open_float(dir)
+        end,
+      }
+
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
           mappings = {
-            n = {
-              ['|'] = 'file_vsplit',
-              ['_'] = 'file_split',
-            },
-            i = {
-              ['|'] = 'file_vsplit',
-              ['_'] = 'file_split',
-              ['<Esc>'] = require('telescope.actions').close,
-            },
+            n = maps,
+            i = maps,
           },
         },
         colorscheme = {
@@ -178,7 +200,8 @@ require('lazy').setup({
               '.git',
               '.cache',
               '.venv',
-              'venv'
+              'venv',
+              '.svelte%-kit',
             },
           },
         },
@@ -204,17 +227,17 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader>sc', builtin.colorscheme, { desc = '[S]earch [C]olor Themes' })
+      vim.keymap.set('n', '<leader>sc', '<cmd>Telescope colors<CR>', { desc = '[S]earch [C]olor Themes' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Slightly advanced example of overriding default behavior and theme
-      vim.keymap.set('n', '<leader>/', function()
+      vim.keymap.set('n', '?', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
           previewer = false,
         })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+      end, { desc = '[?] Fuzzily search in current buffer' })
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
@@ -391,7 +414,10 @@ require('lazy').setup({
       -- local capabilities = vim.lsp.protocol.make_client_capabilities()
       -- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      require('lspconfig')['lua_ls'].setup { capabilities = capabilities }
+      -- require('lspconfig')['lua_ls'].setup { capabilities = capabilities }
+      vim.lsp.config('lua_ls', {
+        capabilities = capabilities,
+      })
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -405,6 +431,19 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
+        svelte = {
+          cmd = { 'svelte-language-server', '--stdio' },
+          filetypes = { 'svelte' },
+          settings = {
+            svelte = {
+              plugin = {
+                typescript = { enable = true },
+                html = { enable = true },
+                css = { enable = true },
+              },
+            },
+          },
+        },
         pyright = {},
         -- ruff = {},
         -- rust_analyzer = {},
@@ -457,14 +496,10 @@ require('lazy').setup({
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            -- require('lspconfig')[server_name].setup(server)
+            vim.lsp.config(server_name, server)
           end,
         },
-      }
-
-      require('lspconfig').gdscript.setup {
-        name = 'godot',
-        cmd = { 'ncat', '127.0.0.1', '6005' },
       }
     end,
   },
@@ -773,10 +808,23 @@ require('lazy').setup({
 })
 
 -- I'm not sure what this does but it fixed my stuff so yea
-require('nvim-treesitter.install').compilers = { 'clang' }
+require('nvim-treesitter.install').compilers = { 'gcc' }
+require('nvim-treesitter.install').prefer_git = false
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
 -- Remove ugly icky ~ on end of buffer
-vim.opt.fillchars:append({ eob = " " })
+vim.opt.fillchars:append { eob = ' ' }
+
+vim.cmd 'colorscheme kanagawa-wave'
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'qf',
+  callback = function()
+    -- restore Enter to default in quickfix windows
+    vim.keymap.set('n', '<CR>', '<CR>', { buffer = true, noremap = true, silent = true })
+  end,
+})
+
+vim.cmd("colorscheme sonokai")

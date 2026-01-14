@@ -5,13 +5,7 @@ return {
   'folke/tokyonight.nvim',
   'sainnhe/everforest',
   'sainnhe/sonokai',
-  {
-    'cpwrs/americano.nvim',
-    priority = 1000,
-    init = function()
-      vim.cmd.colorscheme 'catppuccin'
-    end,
-  },
+  'cpwrs/americano.nvim',
   'EdenEast/nightfox.nvim',
   'bluz71/vim-moonfly-colors',
   'bluz71/vim-nightfly-colors',

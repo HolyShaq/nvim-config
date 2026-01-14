@@ -51,16 +51,47 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 -- Buffer controls
 map('n', '<leader>bd', '<Cmd>bd<CR>', { desc = 'Delete buffer' })
 map('n', '<leader>bD', '<Cmd>bd!<CR>', { desc = 'Delete buffer!!!' })
-map('n', '<leader>bc', '<Cmd>%bd|e#|bd#<CR>', {desc = 'Clear all other buffers'})
+map('n', '<leader>bc', '<Cmd>%bd!<CR><Cmd>Alpha<CR>', { desc = 'Clear all buffers' })
 
 -- Tailwind controls
 map('n', '<leader>twt', ':TailwindConcealToggle<CR>', { desc = 'Toggle tailwind conceal' })
-map('n', '<leader>tws', ':TailwindSort<CR>', {desc = 'Sort tailwind'})
+map('n', '<leader>tws', ':TailwindSort<CR>', { desc = 'Sort tailwind' })
 
 -- Neovide
 map('n', '<M-Enter>', function()
   vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
 end, { desc = 'Toggle Neovide Fullscreen' })
+
+-- Copy path keymaps
+map('n', '<leader>yc', ':let @+ = getcwd()<CR>', { desc = 'Copy current working directory' })
+map('n', '<leader>yb', ':let @+ = expand("%:.:h")<CR>', { desc = 'Copy buffer directory' })
+map('n', '<leader>yf', ':let @+ = expand("%:.")<CR>', { desc = 'Copy file path' })
+map('n', '<leader>yx', function()
+  local relpath = vim.fn.fnamemodify(vim.fn.expand '%', ':.')
+  local filetype = vim.bo.filetype or ''
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  local content = table.concat(lines, '\n')
+  local formatted = string.format('File: %s\n```%s\n%s\n```', relpath, filetype, content)
+
+  vim.fn.setreg('+', formatted)
+  print('Copied context for ' .. relpath)
+end, { desc = 'Copy full file context' })
+map('v', '<leader>yx', function()
+  local relpath = vim.fn.fnamemodify(vim.fn.expand '%', ':.')
+  local filetype = vim.bo.filetype or ''
+
+  -- Get the 1-based line numbers of the visual selection
+  local _start = vim.fn.getpos(".")
+  local _end = vim.fn.getpos("v")
+
+  local lines = vim.fn.getregion(_start, _end)
+
+  local content = table.concat(lines, '\n')
+  local formatted = string.format('File: %s\n```%s\n%s\n```', relpath, filetype, content)
+
+  vim.fn.setreg('+', formatted)
+  print('Copied ' .. #lines .. ' lines of context for ' .. relpath)
+end, { desc = 'Copy context' })
 
 -- NGL idk what this is but its in the kickstart so ima keep it in
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
