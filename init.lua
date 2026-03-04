@@ -15,7 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Kickstart Plugins
 require('lazy').setup({
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  -- BITCH!! THIS MOTHERFUCKER HAS BEEN FUCKING UP MY FTPLUGINS FOR A WHILE NOW!!!!
+  -- 'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -453,7 +454,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
+        ts_ls = {},
         --
 
         lua_ls = {
@@ -467,6 +468,28 @@ require('lazy').setup({
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+
+        intelephense = {
+          settings = {
+            intelephense = {
+              files = {
+                maxSize = 5000000,
+              },
+              -- This is the "magic" for WordPress development
+              stubs = {
+                'wordpress',
+                'woocommerce',
+                'acf-pro',
+                'wordpress-globals',
+                'wp-cli',
+                'phpunit',
+              },
+              environment = {
+                phpVersion = '8.2', -- Match your Hostinger PHP version
+              },
             },
           },
         },
@@ -540,6 +563,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         python = { 'black' },
         javascript = { 'prettierd' },
+        javascriptreact = { 'prettierd' },
         typescript = { 'prettierd' },
         typescriptreact = { 'prettierd' },
         ledger = { 'trim_newlines', 'trim_whitespace' },
@@ -817,8 +841,6 @@ require('nvim-treesitter.install').prefer_git = false
 -- Remove ugly icky ~ on end of buffer
 vim.opt.fillchars:append { eob = ' ' }
 
-vim.cmd 'colorscheme kanagawa-wave'
-
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'qf',
   callback = function()
@@ -827,4 +849,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-vim.cmd("colorscheme sonokai")
+vim.cmd 'colorscheme carbonfox'
+
+vim.cmd 'colorscheme americano'
