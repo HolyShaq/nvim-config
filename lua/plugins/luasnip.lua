@@ -24,7 +24,9 @@ return {
 
     -- define once
     ls.add_snippets('javascript', { clog })
+    ls.add_snippets('javascriptreact', { clog })
     ls.add_snippets('typescript', { clog })
+    ls.add_snippets('typescriptreact', { clog })
     ls.add_snippets('svelte', { clog })
   end,
 }
