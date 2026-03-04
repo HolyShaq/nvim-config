@@ -849,6 +849,4 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-vim.cmd 'colorscheme carbonfox'
-
-vim.cmd 'colorscheme americano'
+vim.cmd("colorscheme tokyonight-night")
