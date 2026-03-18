@@ -849,4 +849,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- Wayland Clipboard Integration
+vim.opt.clipboard = 'unnamedplus'
+
 vim.cmd("colorscheme tokyonight-night")
