@@ -728,69 +728,22 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
-  { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    main = 'nvim-treesitter.config', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          node_incremental = 'v',
-          node_decremental = 'V',
-        },
-      },
-      ensure_installed = {
-        -- Vim Languages
-        'lua',
-        'luadoc',
-        'vim',
-        'vimdoc',
-
-        -- General Languages
-        'bash',
-        'c',
-        'python',
-
-        -- Javascript
-        'javascript',
-        'typescript',
-
-        -- Godot
-        'gdscript',
-        'godot_resource',
-        'gdshader',
-
-        -- Markdown
-        'markdown',
-        'markdown_inline',
-
-        -- Misc
-        'diff',
-        'html',
-        'query',
-        'ledger',
-      },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby', 'gdscript', 'ledger' } },
-    },
-
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-  },
+  {
+  "romus204/tree-sitter-manager.nvim",
+  dependencies = {}, -- tree-sitter CLI must be installed system-wide
+  config = function()
+    require("tree-sitter-manager").setup({
+      -- Default Options
+      -- ensure_installed = {}, -- list of parsers to install at the start of a neovim session
+      -- border = nil, -- border style for the window (e.g. "rounded", "single"), if nil, use the default border style defined by 'vim.o.winborder'. See :h 'winborder' for more info.
+      -- auto_install = false, -- if enabled, install missing parsers when editing a new file
+      -- highlight = true, -- treesitter highlighting is enabled by default
+      -- languages = {}, -- override or add new parser sources
+      -- parser_dir = vim.fn.stdpath("data") .. "/site/parser",
+      -- query_dir = vim.fn.stdpath("data") .. "/site/queries",
+    })
+  end
+},
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -854,7 +807,7 @@ vim.opt.clipboard = 'unnamedplus'
 
 vim.keymap.set({ 'x', 'o' }, 'v', function()
   if vim.treesitter.get_parser(nil, nil, { error = false }) then
-    require 'vim.treesitter._select'.select_parent(vim.v.count1)
+    require('vim.treesitter._select').select_parent(vim.v.count1)
   else
     vim.lsp.buf.selection_range(vim.v.count1)
   end
@@ -862,10 +815,10 @@ end, { desc = 'Select parent treesitter node or outer incremental lsp selections
 
 vim.keymap.set({ 'x', 'o' }, 'V', function()
   if vim.treesitter.get_parser(nil, nil, { error = false }) then
-    require 'vim.treesitter._select'.select_child(vim.v.count1)
+    require('vim.treesitter._select').select_child(vim.v.count1)
   else
     vim.lsp.buf.selection_range(-vim.v.count1)
   end
 end, { desc = 'Select child treesitter node or inner incremental lsp selections' })
 
-vim.cmd("colorscheme tokyonight-night")
+vim.cmd 'colorscheme tokyonight-night'
