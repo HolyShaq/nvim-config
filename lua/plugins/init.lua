@@ -23,11 +23,9 @@ return {
 
   {
     'vyfor/cord.nvim',
-    build = './build || .\\build',
-    event = 'VeryLazy',
     opts = {
       editor = {
-        image = 'https://cdn2.steamgriddb.com/icon_thumb/0e080857e96278e6dba76ac029faf291.png',
+        icon = 'https://cdn2.steamgriddb.com/icon_thumb/0e080857e96278e6dba76ac029faf291.png',
         tooltip = 'The universe is, and we are.',
       },
     }, -- calls require('cord').setup()
