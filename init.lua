@@ -171,6 +171,9 @@ require('lazy').setup({
             n = maps,
             i = maps,
           },
+          preview = {
+            treesitter = false,
+          },
         },
         colorscheme = {
           ignore_builtins = true,
@@ -203,6 +206,9 @@ require('lazy').setup({
               '.venv',
               'venv',
               '.svelte%-kit',
+              'target',
+              'Cargo%.lock',
+              'Cargo%.toml%.orig',
             },
           },
         },
@@ -230,15 +236,16 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader>sc', '<cmd>Telescope colors<CR>', { desc = '[S]earch [C]olor Themes' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '?', builtin.current_buffer_fuzzy_find, { desc = '[?] Fuzzily search in current buffer' })
 
       -- Slightly advanced example of overriding default behavior and theme
-      vim.keymap.set('n', '?', function()
-        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[?] Fuzzily search in current buffer' })
+      -- vim.keymap.set('n', '?', function()
+      --   -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+      --   builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+      --     winblend = 10,
+      --     previewer = false,
+      --   })
+      -- end, { desc = '[?] Fuzzily search in current buffer' })
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
@@ -729,21 +736,21 @@ require('lazy').setup({
     end,
   },
   {
-  "romus204/tree-sitter-manager.nvim",
-  dependencies = {}, -- tree-sitter CLI must be installed system-wide
-  config = function()
-    require("tree-sitter-manager").setup({
-      -- Default Options
-      -- ensure_installed = {}, -- list of parsers to install at the start of a neovim session
-      -- border = nil, -- border style for the window (e.g. "rounded", "single"), if nil, use the default border style defined by 'vim.o.winborder'. See :h 'winborder' for more info.
-      -- auto_install = false, -- if enabled, install missing parsers when editing a new file
-      -- highlight = true, -- treesitter highlighting is enabled by default
-      -- languages = {}, -- override or add new parser sources
-      -- parser_dir = vim.fn.stdpath("data") .. "/site/parser",
-      -- query_dir = vim.fn.stdpath("data") .. "/site/queries",
-    })
-  end
-},
+    'romus204/tree-sitter-manager.nvim',
+    dependencies = {}, -- tree-sitter CLI must be installed system-wide
+    config = function()
+      require('tree-sitter-manager').setup {
+        -- Default Options
+        -- ensure_installed = {}, -- list of parsers to install at the start of a neovim session
+        -- border = nil, -- border style for the window (e.g. "rounded", "single"), if nil, use the default border style defined by 'vim.o.winborder'. See :h 'winborder' for more info.
+        -- auto_install = false, -- if enabled, install missing parsers when editing a new file
+        -- highlight = true, -- treesitter highlighting is enabled by default
+        -- languages = {}, -- override or add new parser sources
+        -- parser_dir = vim.fn.stdpath("data") .. "/site/parser",
+        -- query_dir = vim.fn.stdpath("data") .. "/site/queries",
+      }
+    end,
+  },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
